@@ -11,7 +11,16 @@ function cadVeiculo(e) {
     hora: time.getHours(),
     min: time.getMinutes()
   }
-  console.log(carro)
+  if (localStorage.getItem('patio') === null) {
+    var carros = [];
+    carros.push(carro);
+    localStorage.setItem('patio', JSON.stringify(carros));
+  }
+  else {
+    var carros = JSON.parse(localStorage.getItem('patio'));
+    carros.push(carro);
+    localStorage.setItem('patio', JSON.stringify(carros));
+  }
 
   e.preventDefault();
 
