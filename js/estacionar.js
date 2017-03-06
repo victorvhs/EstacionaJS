@@ -21,8 +21,22 @@ function cadVeiculo(e) {
     carros.push(carro);
     localStorage.setItem('patio', JSON.stringify(carros));
   }
-
+  document.getElementById('formulario').reset();
+  mostrarPatio();
   e.preventDefault();
+
+}
+
+function apagar(pl) {
+  var carros = JSON.parse(localStorage.getItem('patio'));
+
+  for (var i = 0; i < carros.length; i++) {
+    if (carros[i].placa == pl) {
+      carros.splice(i, 1);
+    }
+    localStorage.setItem('patio', JSON.stringify(carros));
+  }
+  mostrarPatio();
 
 }
 
@@ -31,7 +45,6 @@ function mostrarPatio() {
   var tabela = document.getElementById('resultado');
 
   tabela.innerHTML = "";
- console.log(carros[0]);
   for (var i = 0; i < carros.length; i++) {
     var modelo = carros[i].modelo;
     var placa = carros[i].placa;
@@ -41,12 +54,9 @@ function mostrarPatio() {
    tabela.innerHTML += '<tr><td>'  + modelo +
              '</td><td>' + placa +
              '</td><td>' + hora + ':' + minuto+
-             //'</td><td>' + Finalizar +
-            '</tr>';
-
-
-
+             '</td><td>'+
+             '<button class="btn btn-danger" onclick="apagar(\''+ placa +'\')">'+
+             'Finalizar <i class="fa fa-trash-o" aria-hidden="true"></i></button>'+
+            '</td></tr>';
   }
-
-
 }
