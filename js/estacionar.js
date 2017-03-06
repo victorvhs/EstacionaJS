@@ -7,7 +7,7 @@ function cadVeiculo(e) {
 
   carro = {
     modelo: modelo,
-    palca: placa,
+    placa: placa,
     hora: time.getHours(),
     min: time.getMinutes()
   }
@@ -23,5 +23,30 @@ function cadVeiculo(e) {
   }
 
   e.preventDefault();
+
+}
+
+function mostrarPatio() {
+  var carros = JSON.parse( localStorage.getItem('patio') );
+  var tabela = document.getElementById('resultado');
+
+  tabela.innerHTML = "";
+ console.log(carros[0]);
+  for (var i = 0; i < carros.length; i++) {
+    var modelo = carros[i].modelo;
+    var placa = carros[i].placa;
+    var hora = carros[i].hora;
+    var minuto = carros[i].min;
+
+   tabela.innerHTML += '<tr><td>'  + modelo +
+             '</td><td>' + placa +
+             '</td><td>' + hora + ':' + minuto+
+             //'</td><td>' + Finalizar +
+            '</tr>';
+
+
+
+  }
+
 
 }
